@@ -1,0 +1,163 @@
+<div id="footer-container">
+{{#if subscriptionFooter.active}}
+  {{> explorer/views/partials/suscription}}
+{{/if}}
+<footer class="explorer-footer-contact-container">
+  <div class="explorer-footer-contact">
+    <div class="explorer-footer-contact-logo header--custom-background">
+        {{#if logo}}
+        <a class="nav-explorer-header__logo" href="/" id="logo-wrapper">
+          <span class="nav-header__title-hidden">{{name}}</span>
+          <img class="nav-header__image" src="{{logo}}" alt="{{name}}" itemprop="logo" />
+        </a>
+        {{else}}
+        <h3 class="nav-footer-contact-title header--custom-text">
+          <a href="/">{{name}}</a>
+        </h3>
+        {{/if}}
+        {{#if showLogoCaption}}
+        <div class="explorer-footer__brand-col header--custom-text header--custom-background">
+          <p class="explorer-footer__logo-caption">{{{logoCaption}}}</p>
+        </div>
+        {{/if}}
+    </div>
+
+    <div class="nav-bounds nav-bounds--contact {{#if interestLinks}} explorer-footer--with-links-pages {{/if}}">
+      <div class="explorer-footer__contact-col {{#if interestLinks}} explorer-footer--with-links-pages {{/if}}">
+        <h5 class="explorer-footer__contact-title">{{{i18n.contact}}}</h5>
+        {{#if showSocialMedia}}
+        <div class="explorer-footer__social-media">
+          {{#each socialNetworks}}
+          <a href="{{url}}" target="_blank" class="explorer-header__svg" rel="noopener noreferrer nofollow">
+            {{> (concat 'explorer/views/partials/icons/' (lookup . 'name'))}}
+          </a>
+          {{/each}}
+        </div>
+        {{/if}}
+        {{#if showContact}}
+        <ul class="explorer-footer__contact header--custom-border">
+          <meta itemprop="contactType" content="customer service" />
+          <li>
+            {{#if showPhone}}
+            <a id="shop-phone-link" itemprop="telephone" href="tel:{{phone.raw}}" rel="nofollow">
+              <span>{{phone.formatted}}</span>
+            </a>
+            {{/if}}
+            {{#if showEmail}}
+            <a id="shop-mail-link" itemprop="email" href="mailto:{{email}}" rel="nofollow">
+              <span>{{email}}</span>
+            </a>
+            {{/if}}
+          </li>
+          {{#if showAddress}}
+          <li>
+            <a id="shop-address-link" itemprop="streetAddress">
+              <span>{{address.address}}</span>
+              <span>{{address.city}}</span>
+              <span>{{address.state}}</span>
+            </a>
+          </li>
+          {{/if}}
+          {{#if contact}}
+          <li>
+            <a class="header--custom-text contact-button" href="{{contact.href}}" rel="nofollow">
+              {{> explorer/views/partials/contact}}
+               <span href="{{contact.href}}">{{contact.label}}</span>
+            </a>
+          </li>
+          {{/if}}
+        </ul>
+        {{/if}}
+        {{#if linkToLGPD}}
+        <div class="explorer-footer__info-container--desktop">
+          <a href="{{linkToHowBuy.href}}">{{linkToHowBuy.label}}</a>
+          <span class="explorer-footer-info__separator"> | </span>
+          <a href="{{linkToLGPD.href}}">{{linkToLGPD.label}}</a>
+          {{#if showBusinessData}}
+          {{#with fiscalData}}
+          <div class="nav-footer-fiscal-data">
+            <p class="nav-footer-fiscal-data__name">{{legal_name}}</p>
+            <p class="nav-footer-fiscal-data__id">{{legal_doc}}</p>
+          </div>
+          {{/with}}
+          {{/if}}
+          {{#if showQrData}}
+          {{#with fiscalData}}
+          <a class="explorer-footer__afip-link" href={{qr_link}} target="_F960AFIPInfo">
+            <img class="nav-footer-afip-img" src={{qr_img}} alt="Data fiscal" />
+          </a>
+          {{/with}}
+          {{/if}}
+        </div>
+        {{/if}}
+      </div>
+
+      <div class="explorer-footer__menu header--custom-border {{#if interestLinks}} explorer-footer--with-links-pages {{/if}}">
+        <h5 class="explorer-footer__menu-title">{{dropdown_title_text}}</h5>
+        <div class="explorer-footer__categories-col">
+          {{#each menu}}
+          <span class="explorer-footer__category">
+            <a href="{{url}}" data-id="{{id}}">
+              {{name}}
+            </a>
+          </span>
+          {{/each}}
+        </div>
+      </div>
+      {{#if interestLinks}}
+        <div class="explorer-footer__links-pages-container">
+          <div class="explorer_footer__links-pages dropdown">
+            <div class="explorer_footer__link-pages__title-container dropdown-title">
+              <h4 class="explorer_footer__link-pages__title">{{i18n.interestLinksLabel}}</h4>
+              <div class="explorer_footer__link-pages__icon-add">
+                {{> explorer/views/partials/icons/add }}
+              </div>
+              <div class="explorer_footer__link-pages__icon-substract">
+                {{> explorer/views/partials/icons/substract }}
+              </div>
+            </div>
+            <div class="explorer_footer__link-pages__links-container dropdown-content">
+              {{#each interestLinks}}
+                <a class="explorer_footer__link" href="{{url}}">
+                  {{name}}
+                </a>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="explorer-footer-info explorer-footer-info">
+    {{#if linkToLGPD}}
+    <div class="explorer-footer__info-container--mobile">
+      <a href="{{linkToHowBuy.href}}">{{linkToHowBuy.label}}</a>
+      <span class="explorer-footer-info__separator"> | </span>
+      <a href="{{linkToLGPD.href}}">{{linkToLGPD.label}}</a>
+      {{#if showBusinessData}}
+      {{#with fiscalData}}
+      <div class="nav-footer-fiscal-data">
+        <p class="nav-footer-fiscal-data__name">{{legal_name}}</p>
+        <p class="nav-footer-fiscal-data__id">{{legal_doc}}</p>
+      </div>
+      {{/with}}
+      {{/if}}
+      {{#if showQrData}}
+      {{#with fiscalData}}
+      <a class="explorer-footer__afip-link" href={{qr_link}} target="_F960AFIPInfo">
+        <img class="nav-footer-afip-img" src={{qr_img}} alt="Data fiscal" />
+      </a>
+      {{/with}}
+      {{/if}}
+    </div>
+    {{/if}}
+    <div>
+      <a href="{{{linkToMShopsLandingPage}}}" target="_blank" class="explorer-footer-info__brand">
+        <span class="explorer-footer-info__separator"> {{i18n.powered_by}}</span>
+        {{> explorer/views/partials/icons/mshops}}
+      </a>
+    </div>
+  </div>
+</footer>
+</div>
